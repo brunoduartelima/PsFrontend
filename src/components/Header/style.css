@@ -1,0 +1,141 @@
+#content-header {
+    width: 100vw;
+    height: 70px;
+    border-bottom: 2px solid var(--border-color);
+    background-color: #000;
+    display: flex;
+}
+
+.box-logo {
+    width: 15%;
+    border-right: 1px solid var(--border-color);
+    min-width: 200px;
+}
+
+.box-logo .logo {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-logo .logo h3 {
+    margin: 15px 15px;
+    font-size: 17px;
+    color: #FFF;
+}
+
+
+#content-header .box-logo img {
+    width: 100px;
+    height: 70px;
+}
+
+.content{
+    width: 70%;
+    display: flex;
+    border-right: 1px solid var(--border-color);
+}
+
+.menu {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.content .menu li.active{
+    background-color: var(--border-color);
+    border-radius: 8px;
+}
+
+.option {
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    padding: 0 35px;
+    letter-spacing: .5px;
+    transition: all  .4s ease-in-out;
+}
+
+.option:hover {
+    color: var(--orange-color);
+}
+
+.option svg {
+    margin-right: 8px;
+    margin-bottom: -3px;
+}
+
+.shortcuts {
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.shortcuts span {
+    color: #FFF;
+    font-size: 16px;
+}
+
+.shortcuts button {
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border: none;
+    transition: 400ms;
+}
+
+.shortcuts button:hover {
+    border: 1px solid var(--orange-color);;
+}
+
+.menu-inner {
+    display: none;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-inner button {
+    background-color: #000;
+    width: 23px;
+    height: 23px;
+    border: none;
+}
+
+@media (max-width: 1300px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    #content-header .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #content-header .content .menu {
+        grid-column-start: 2;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .shortcuts {
+        display: none;
+    }
+    #content-header .content {
+        display: none;
+    }
+
+    #content-header .box-logo {
+        display: flex;
+        flex: 1;
+    }
+
+    #content-header .menu-inner {
+        display: flex;
+    }
+}
