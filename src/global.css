@@ -1,8 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Ubuntu:wght@400;500;700&display=swap');
 
 :root{
-    --orange-color: #ffa500;
-    --border-color: #2f363d;
+    --orange-color: #FF6F00;
+    --text-color: #1b1b1b;
+    --header-color: #2f363d;
+    --border-color: #708191;
+    --body-color: #f0f0f5;
 }
 
 *{
@@ -14,12 +17,24 @@
 
 body {
     font: 400 14px Roboto, sans-serif;
-    background: #f0f0f5;
+    background: var(--body-color);
     -webkit-font-smoothing: antialiased;
 }
 
-input, button, textarea, label {
+input, button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+input, button, textarea, label, p {
     font: 400 18px Roboto, sans-serif;
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+    font: 500 22px Ubuntu, sans-serif;
+    color: var(--text-color);
 }
 
 button {
@@ -29,14 +44,6 @@ button {
 li {
     list-style: none;
 }
-
-/* form input {
-    width: 100%;
-    height: 60px;
-    color: #333;
-    border: 1px solid #dcdce6;
-    padding: 0 24px;
-}  */
 
 .button {
     width: 100%;

@@ -19,7 +19,7 @@ export default function Header() {
     }
 
     return (
-            <header id="content-header">
+            <header id="container-header">
                 
                 <div className="box-logo">
                     <Link className="logo" to="/profile" >

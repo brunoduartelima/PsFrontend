@@ -1,55 +1,55 @@
-#content-header {
+#container-header {
     width: 100vw;
     height: 70px;
     border-bottom: 2px solid var(--border-color);
-    background-color: #000;
+    background-color: var(--header-color);
     display: flex;
 }
 
-.box-logo {
+#container-header .box-logo {
     width: 15%;
     border-right: 1px solid var(--border-color);
     min-width: 200px;
 }
 
-.box-logo .logo {
+#container-header .box-logo .logo {
     display: flex;
     text-decoration: none;
     align-items: center;
     justify-content: center;
 }
 
-.box-logo .logo h3 {
+#container-header .box-logo .logo h3 {
     margin: 15px 15px;
     font-size: 17px;
     color: #FFF;
 }
 
 
-#content-header .box-logo img {
+#container-header .box-logo img {
     width: 100px;
     height: 70px;
 }
 
-.content{
+#container-header .content{
     width: 70%;
     display: flex;
     border-right: 1px solid var(--border-color);
 }
 
-.menu {
+#container-header .menu {
     flex: 1;
     align-items: center;
     display: flex;
     justify-content: center;
 }
 
-.content .menu li.active{
+#container-header .content .menu li.active{
     background-color: var(--border-color);
     border-radius: 8px;
 }
 
-.option {
+#container-header .option {
     text-decoration: none;
     font-size: 18px;
     color: #fff;
@@ -58,16 +58,16 @@
     transition: all  .4s ease-in-out;
 }
 
-.option:hover {
+#container-header .option:hover {
     color: var(--orange-color);
 }
 
-.option svg {
+#container-header .option svg {
     margin-right: 8px;
     margin-bottom: -3px;
 }
 
-.shortcuts {
+#container-header .shortcuts {
     width: 15%;
     display: flex;
     align-items: center;
@@ -75,32 +75,32 @@
     padding: 10px;
 }
 
-.shortcuts span {
+#container-header  .shortcuts span {
     color: #FFF;
     font-size: 16px;
 }
 
-.shortcuts button {
+#container-header .shortcuts button {
     width: 40px;
     height: 40px;
-    background: #000;
+    background: var(--header-color);;
     border: none;
     transition: 400ms;
 }
 
-.shortcuts button:hover {
+#container-header .shortcuts button:hover {
     border: 1px solid var(--orange-color);;
 }
 
-.menu-inner {
+#container-header .menu-inner {
     display: none;
     width: 10%;
     align-items: center;
     justify-content: center;
 }
 
-.menu-inner button {
-    background-color: #000;
+#container-header .menu-inner button {
+    background-color: var(--header-color);;
     width: 23px;
     height: 23px;
     border: none;
@@ -111,31 +111,31 @@
         overflow-x: hidden;
     }
 
-    #content-header .content {
+    #container-header .content {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    #content-header .content .menu {
+    #container-header .content .menu {
         grid-column-start: 2;
     }
 }
 
 @media (max-width: 900px) {
 
-    .shortcuts {
+    #container-header .shortcuts {
         display: none;
     }
-    #content-header .content {
+    #container-header .content {
         display: none;
     }
 
-    #content-header .box-logo {
+    #container-header .box-logo {
         display: flex;
         flex: 1;
     }
 
-    #content-header .menu-inner {
+    #container-header .menu-inner {
         display: flex;
     }
 }

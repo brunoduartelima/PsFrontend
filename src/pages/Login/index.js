@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
 
 import api from '../../services/api';
+
+import image from '../../assets/img-bottom.jpg';
+import logo from '../../assets/logo.png';
+
 import './style.css';
 
-import logoImg from '../../assets/logo.png';
-
 export default function Login() {
-    const [nick, setNick] = useState('');
-    const [password, setPassword] = useState('');
-
     const history = useHistory();
 
-    async function handleLogin(e) {
-        e.preventDefault();
+    const [emailLogin, setEmailLogin] = useState('');
+    const [passwordLogin, setPasswordLogin] = useState('');
+
+    async function handleLogin(event) {
+        event.preventDefault();
 
         try {
-            const response = await api.post('sessions', {nick, password});
+            const response = await api.post('sessions', { emailLogin, passwordLogin });
 
             localStorage.setItem('userId', response.data.id);
             localStorage.setItem('nameCompany', response.data.nameCompany);
@@ -28,33 +29,46 @@ export default function Login() {
         }
     }
 
-    return (
-        <div id="content-login">
-                <section>
-                    <img src={logoImg} alt="Personal Manager" className="logoImg" />
-                    
-                    <h1>Faça seu login</h1>
-                    
-                    <form onSubmit={handleLogin}>
+    return(
+        <div id="container-login">
+            
+            <img className="img-bottom" src={image} alt="imagem"/>
+            
+            <div className="content-login">
+                
+                <form onSubmit={handleLogin}>
+                    <img src={logo} alt="PsManager"/>
+                    <h2>Entrar</h2>
 
-                        <div className="input">
-                        <input type="text" value={nick} onChange={e => setNick(e.target.value)}/>
-                        <label>Usuário</label>
-                        </div>
-                        
-                        <div className="input">
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-                        <label>Senha</label>
-                        </div>
-                        
-                        <button type="submit">Entrar</button>
+                    <div className="field">
+                    <input 
+                        required 
+                        name="email" 
+                        type="email"
+                        value={emailLogin}
+                        onChange={e => setEmailLogin(e.target.value)} 
+                    />
+                    <label>E-mail</label>
+                    </div>
 
-                        <Link className="back-link" to="/register">
-                            <FiLogIn  size={16} color="#E02041" />
-                            Não tenho cadastro
-                        </Link>
-                    </form>
-                </section>
-        </div>
+
+                    <div className="field">
+                    <input 
+                        required 
+                        type="password" 
+                        name="password"
+                        value={passwordLogin}
+                        onChange={e => setPasswordLogin(e.target.value)}  
+                    />
+                    <label>Senha</label>
+                    </div>
+
+                    <p>Não tem uma conta? <Link className="link" to="/">Crie uma!</Link></p>
+                    
+                    <button type="submit">Acessar</button>
+                </form>
+
+            </div>
+        </div>  
     );
 }

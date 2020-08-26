@@ -125,9 +125,8 @@
   margin-bottom: 2px;
 }
 
-.clientContainer .clientShow .contInfo-active {
+.clientContainer .clientShow .contInfo {
   display: none;
-
 }
 
 .clientContainer .clientShow .clientInfo li {

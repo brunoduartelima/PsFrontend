@@ -15,8 +15,10 @@ export default function Client() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [dateBirth, setDateBirth] = useState('');
     const [cpf, setCpf] = useState('');
-    const [clientDisplay, setClientDisplay] = useState(false);
-    const [query, setQuery] = useState('');
+
+    const [idClient, setIdClient] = useState('');
+    const [selectedShowClient, setSelectedShowClient] = useState([]);
+    const [totalClient, setTotalClient] = useState(0);
     
     const userId = localStorage.getItem('userId');
 
@@ -25,25 +27,31 @@ export default function Client() {
     useEffect(() => {
         api.get('clients', {
             headers: {
-                Authorization: userId,
-            query: {
-                name: query,
-            }
+                Authorization: userId
             }
         }).then(response => {
             setClients(response.data);
+            setTotalClient(response.headers['X-Total-Count']);
         })
-    }, [userId, query]);
+    }, [userId]);
+
+    function handleModalDelete(idClient) {
+        setModalDeleteOpen(true);
+        setIdClient(idClient);
+    }
 
     async function handleDeleteClient(idClient) {
         try {
+
             await api.delete(`clients/${idClient}`, {
                 headers: {
                     Authorization: userId,
                 }
             });
-
+            
             setClients(clients.filter(client => client.idClient !== idClient));
+            
+            setModalDeleteOpen(false);
         } catch (err) {
             alert('Erro ao deletar caso, tente novamente.');
         }
@@ -74,22 +82,16 @@ export default function Client() {
 
     }
 
-    const style = clientDisplay ? 'contInfo' : 'contInfo-active';
+    function handleShowDataClient(idClient) {
+        const alreadySelected = selectedShowClient.findIndex(client => client === idClient);
 
-    const teste = clientDisplay ? 'contInfo-active' : 'contInfo';
+        if (alreadySelected > -1) {
+            const filteredClient = selectedShowClient.filter(client => client !== idClient);
+            
+            setSelectedShowClient(filteredClient);
 
-    const [idClient, setIdClient] = useState('');
-
-    const [option, setOption] = useState(false);
-
-    function takeId(idClient){
-        
-        setIdClient(idClient);
-
-        if(option === true){
-            setModalDeleteOpen(true);
         } else {
-            setClientDisplay(!clientDisplay);
+            setSelectedShowClient([...selectedShowClient, idClient]);
         }
     }
 
@@ -117,15 +119,16 @@ export default function Client() {
             border: '1px solid #171717'
         }
     }
+
     return(
-        <div>
+        <>
             <Header/>
             <div className="clientContainer">
                 <div className="optionContent">
                     <form>
                         <div className="inputContainer">
                             <i className="icon"><FaSearch size={20} /></i>
-                            <input className="input-field" type="text" name="name" placeholder="Procurar" value={query} onChange={e => setQuery(e.target.value)} />
+                            <input className="input-field" type="text" name="name" placeholder="Procurar"  />
                         </div>
                     </form>
                     <div className="optionContainer">
@@ -137,7 +140,12 @@ export default function Client() {
                             <FaUserPlus size={20} />
                             Cadastrar
                         </button>
-                        <Modal isOpen={modalRegisterOpen} shouldCloseOnOverlayClick={false}  onRequestClose={() => setModalRegisterOpen(false)} style={styleModalRegister}>
+                        <Modal 
+                            isOpen={modalRegisterOpen} 
+                            shouldCloseOnOverlayClick={false}  
+                            onRequestClose={() => setModalRegisterOpen(false)} 
+                            style={styleModalRegister}
+                        >
                             <div className="modal-register">
                                 <div className="modal-title">
                                     <FaUserPlus size={100} color={"#8F8F8F"}/>
@@ -209,29 +217,32 @@ export default function Client() {
                             </div>    
                         </Modal>
                     </div>
-                    <span>Total de clientes: 527</span>
+                    <span>Total de clientes: {totalClient}</span>
                 </div>
                 <div className="clientShow">
                     <h1>Cadastrados recentemente</h1>
                     <ul className="list-client">
                         {clients.map(client => (
-                        <li className="clientInfo" key={client.idClient}>
+                        <li data-id={client.idClient} className="clientInfo" key={client.idClient}>
                             <div className="contName">
                                 <span>{client.name}</span>
                                 <div>
-                                    <button type="button" className="option-list" onClick={()=>  setOption(false) & takeId(client.idClient)}>
-                                        <FaBook className={teste} size={20} title="Mostrar" />
-                                        <FaBookOpen className={style} size={20} title="Fechar" />
+                                    <button type="button" className="option-list" onClick={() => handleShowDataClient(client.idClient)}>
+                                        <div>
+                                            {selectedShowClient.includes(client.idClient) ?
+                                            <FaBookOpen size={20} title="Fechar" /> : 
+                                            <FaBook size={20} title="Mostrar" /> }
+                                        </div>    
                                     </button>
                                     <button type="button" className="option-list">
                                         <FaUserEdit size={22} title="Editar" />
                                     </button>
-                                    <button type="button" className="option-list" onClick={() => takeId(client.idClient)}>
+                                    <button type="button" className="option-list" onClick={() => handleModalDelete(client.idClient)}>
                                         <FaTrashAlt className="lixo" size={18} title="Excluir" />
                                     </button>
                                 </div>
                             </div>
-                            <div className={style} data-id={client.idClient} >
+                            <div className={ selectedShowClient.includes(client.idClient) ? 'contInfo-active' : 'contInfo' } >
                                 <ul>
                                     <li><span>Data de nasc: </span>{client.dateBirth}</li>
                                     <li><span>Telefone: </span>{client.phoneNumber}</li>
@@ -241,7 +252,6 @@ export default function Client() {
                                     <li><span>Rua: </span>{client.address}</li>
                                     <li><span>Numero: </span>{client.addressNumber}</li>
                                     <li><span>Bairro: </span>{client.neighborhood}</li>
-                                    {/* <li>CEP: {client.cep}</li> */}
                                 </ul>   
                             </div>
                         
@@ -250,12 +260,18 @@ export default function Client() {
                         
                     </ul>
                 </div>
-                <Modal className="modal-delete"  isOpen={modalDeleteOpen} shouldCloseOnOverlayClick={false}  onRequestClose={() => setModalDeleteOpen(false)} style={styleModalDelete}>
-                                <p>Deseja realmente excluir este cliente ?</p>
-                                <button className="btn-dlt" type="button" onClick={() => setModalDeleteOpen(false)} >Cancelar</button>
-                                <button type="button" onClick={() => handleDeleteClient(idClient)}>Excluir</button>
-                            </Modal>
+                <Modal 
+                    className="modal-delete"  
+                    isOpen={modalDeleteOpen} 
+                    shouldCloseOnOverlayClick={false}  
+                    onRequestClose={() => setModalDeleteOpen(false)} 
+                    style={styleModalDelete}
+                >
+                    <p>Deseja realmente excluir este cliente ?</p>
+                    <button className="btn-dlt" type="button" onClick={() => setModalDeleteOpen(false)} >Cancelar</button>
+                    <button type="button" onClick={() => handleDeleteClient(idClient)}>Excluir</button>
+                </Modal>
             </div>
-        </div>
+        </>
     )
 }

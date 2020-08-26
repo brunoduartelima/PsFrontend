@@ -1,0 +1,217 @@
+#container-home {
+    width: 100%;
+    height: 100vh;
+}
+
+#container-home header {
+    width: 100%;
+    height: 100px;
+    background: var(--header-color);
+    display: flex;
+    justify-content: center;
+}
+
+#container-home header .content-header {
+    flex: 1;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#container-home header .content-header img {
+    width: 200px;
+    height: 80px;
+}
+
+#container-home header .content-header form {
+    display: flex;
+}
+
+#container-home header .content-header div {
+    display: flex;
+    flex-direction: column;
+}
+
+#container-home  header .content-header label {
+    color: #FFF;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+#container-home header .content-header input {
+    height: 25px;
+    width: 200px;
+    
+    padding-left: 5px;
+    margin-right: 15px;
+    
+    border: 2px solid var(--border-color);
+    font-size: 12px; 
+}
+
+#container-home  header .content-header button {
+    width: 60px;
+    height: 25px;
+    
+    border: 1px solid var(--border-color);
+    background-color: transparent;
+    color: #fff;
+    font-size: 15px;
+    margin-top: 23.5px;
+}
+
+#container-home main {
+    display: flex;
+    padding: 30px 50px 0px;
+}
+
+#container-home main .description {
+    display: flex;
+    width: 51%;
+    flex-direction: column;
+}
+
+#container-home main .description h1 {
+    flex: 1;
+    font-size: 80px;
+    text-align: center;
+    color: var(--header-color);
+}
+
+#container-home main .description img {
+    margin-top: 15px;
+    width: 450px;
+}
+
+#container-home main .description  h2 {
+    flex: 1;
+    margin-top: 50px;
+    font-weight: 400;
+    font-size: 25px;
+    color: var(--header-color);
+}
+
+#container-home main .description h2 strong + strong {
+    color: var(--orange-color);
+}
+
+#container-home main .description h3 {
+    margin-top: 15px;
+    font-weight: 400;
+    text-align: center;
+    color: var(--header-color);
+}
+
+#container-home main .description h3 strong {
+    color: var(--orange-color);
+    font-size: 30px;
+}
+
+#container-home main .description  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container-home main .register {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin-left: 90px;
+}
+
+#container-home main .register section h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #FF6F00;
+}
+
+#container-home main .register section p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#container-home main .register fieldset {
+    border: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#container-home main .register fieldset legend {
+    margin-bottom: 10px;
+}
+
+#container-home main .register label {
+    font-size: 16px;
+    color: var(--header-color);
+}
+
+#container-home main .register form input {
+    width: 400px;
+    padding: 5px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+#container-home main .register .field-group {
+    display: flex;
+}
+
+#container-home main .register .field {
+    display: flex;
+    flex-direction: column;
+}
+
+#container-home main .register .field-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    border: 0;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#container-home main .register .field-group .field + .field {
+    margin-left: 30px;
+}
+
+#container-home main .register .field-password {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#container-home main .register button {
+    background: #FF6F00;
+    padding: 8px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-weight: 700;
+    color: #fff;
+}
+
+#container-home footer {
+    width: 100vw;
+    height: 60px;
+    margin-top: 20px;
+    background: var(--header-color);
+    display: flex;
+    align-items: center;
+}
+
+#container-home footer div {
+    margin-left: 130px;
+    color: var(--body-color);
+    font-size: 10px;
+}
+
+#container-home footer div a {
+    text-decoration: none;
+    color: var(--orange-color);
+}
